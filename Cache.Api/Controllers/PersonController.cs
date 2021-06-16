@@ -9,16 +9,18 @@ namespace Cache.Api.Controllers
     [Route("api/person")]
     public class PersonController : ControllerBase
     {
-        IPersonService _personService;
+        private readonly IPersonService _personService;
         public PersonController(IPersonService personService)
         {
             _personService = personService;
         }
-        [HttpGet]
+        [HttpGet("{get-all-persons}")]
         public IEnumerable<PersonDto> GetAllPersons()
         {
             return _personService.GetAllPersons();
         }
+
+        [HttpGet("{get-person-by-ssn}")]
         public PersonDto GetPersonBySsn(int ssn)
         {
             return _personService.GetPersonBySsn(ssn);

@@ -6,7 +6,7 @@ namespace Cache.Data.Repository
 {
     public class PersonRepository : IPersonRepository
     {
-        private readonly CacheDbContext _cachingDbContext;
+        private CacheDbContext _cachingDbContext;
         public PersonRepository(CacheDbContext cacheDbContext)
         {
             _cachingDbContext = cacheDbContext;
@@ -25,6 +25,10 @@ namespace Cache.Data.Repository
         {
             _cachingDbContext.Persons.Add(person);
             _cachingDbContext.SaveChanges();
+        }
+        public void Despose()
+        {
+            _cachingDbContext?.Dispose();
         }
     }
 }
